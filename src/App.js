@@ -1,9 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-
+import HomeNavbar from './components/HomeComponents/HomeNavbar.js';
+// import { Route } from 'react-router';
 function App() {
   return (
-    <div>abc</div>
+      
+      <HomeNavbar/>
   );
 }
 
