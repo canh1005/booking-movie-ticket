@@ -25,13 +25,14 @@ function HomeNavbar() {
                     <NavLink activeClassName="bg-white text-green-500" className="transition duration-400 active:bg-gray-200  p-2 rounded-md hover:text-green-500 hover:bg-white" to="b">Contact</NavLink>
                 </div>
                 {/* Menu_icon */}
+                <NavLink className="font-bold text-lg md:hidden" to="id_User"> UserName</NavLink>
                 <button className="cursor-pointer md:hidden p-2" onClick={() => setOpen(!isOpen)}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <div className=" font-bold border-l-2 hidden ">
-                    <NavLink className="px-2 text-base hover:underline " to="login">Đăng nhập</NavLink>
+                <div className=" font-bold border-l-2 ">
+                    <NavLink className="px-2 text-base hover:underline " to="/login">Đăng nhập</NavLink>
                     <NavLink className="px-2  text-base hover:underline " to="signUp">Đăng ký</NavLink>
                 </div>
                 <div className="flex pl-4 hidden md:block border-l-2">
@@ -39,14 +40,14 @@ function HomeNavbar() {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span className="font-bold text-lg" > UserName</span>
+                        <span className="font-bold text-lg" >UserName</span>
                     </NavLink>
                 </div>
+                
             </header>
             {/* Menu on mobile */}
             {/* DIEU KIEN: state=false =>hidden */}
             <div className={!isOpen ? "flex flex-col text-white text-center p-5 bg-green-500 md:hidden" : "hidden"}>
-                <NavLink className="font-bold text-lg" to="id_User"> UserName</NavLink>
                 <NavLink activeClassName="bg-white text-green-500" className="transition duration-400 py-2 rounded-md hover:underline" to="a">Home</NavLink>
                 <NavLink activeClassName="bg-white text-green-500" className="transition duration-400 py-2 rounded-md hover:underline" to="b">Contact</NavLink>
             </div>
