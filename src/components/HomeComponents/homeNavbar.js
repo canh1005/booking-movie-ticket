@@ -1,12 +1,41 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import T_logo from "../../assets/images/T_logo.png"
+import { actLogout } from '../../redux/modules/LoginReducer/actions';
 
-function HomeNavbar() {
+function HomeNavbar(props) {
     const [isOpen, setOpen] = useState("false")
+    const loginRender = () => {
+        if (localStorage.getItem("user")) {
+            return (
+                <div className="flex items-end pl-4 md:block border-l-2" >
+                    <NavLink className=" pr-1" to="id_User">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="inline-block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        {/* user is key */}
+                        <div className="font-bold text-lg" > {localStorage.getItem('user') ? `${JSON.parse(localStorage.getItem('user')).hoTen}` : "UserName"}</div>
+                    </NavLink>
+                    {/* LOGOUT BUTTON */}
+                    <button onClick={() => { props.fetchLogout(props.history) }} className=" ml-5 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="inline-block h-8 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                    </button>
+                </div>)
+
+        } else {
+            return (<div className=" font-bold border-l-2 ">
+                <NavLink className="px-2 text-base hover:underline " to="/login">Đăng nhập</NavLink>
+                <NavLink className="px-2  text-base hover:underline " to="signUp">Đăng ký</NavLink>
+            </div>)
+
+        }
+    }
     return (
         <div>
-            <header className="flex justify-between bg-green-500 px-5 pt-3 items-center text-white">
+            <header className="flex flex-auto justify-between bg-green-500 px-5 pt-3 items-center text-white">
                 {/* Logo */}
                 <div className="flex flex-1 space-x-3 items-center">
                     {/* icon */}
@@ -31,19 +60,9 @@ function HomeNavbar() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <div className=" font-bold border-l-2 ">
-                    <NavLink className="px-2 text-base hover:underline " to="/login">Đăng nhập</NavLink>
-                    <NavLink className="px-2  text-base hover:underline " to="signUp">Đăng ký</NavLink>
-                </div>
-                <div className="flex pl-4 hidden md:block border-l-2">
-                    <NavLink className="flex pr-1" to="id_User">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        <span className="font-bold text-lg" >UserName</span>
-                    </NavLink>
-                </div>
-                
+                {loginRender()}
+
+
             </header>
             {/* Menu on mobile */}
             {/* DIEU KIEN: state=false =>hidden */}
@@ -54,5 +73,13 @@ function HomeNavbar() {
         </div>
     )
 }
-const completeHomeNavbar = HomeNavbar;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchLogout: (history) => {
+            dispatch(actLogout(history));
+        }
+    }
+}
+const completeHomeNavbar = connect(null, mapDispatchToProps)(HomeNavbar);
 export default withRouter(completeHomeNavbar);

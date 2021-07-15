@@ -1,44 +1,79 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import { emptyValid } from '../../utils/validation/validation';
+import { actionLoginAPI } from './../../redux/modules/LoginReducer/actions';
 
-function LoginPage() {
+function LoginPage(props) {
     const [emailActive, setEmailActive] = React.useState(false);
     const [passActive, setPassActive] = React.useState(false)
     const [accountInfo, setAccountInfo] = React.useState({
-        email: '',
-        password: '',
+        taiKhoan: '',
+        matKhau: '',
+        err: { taiKhoan: "", matKhau: "" },
     })
     const handleOnChange = e => {
         const { name, value } = e.target;
+        console.log(e.target);
         setAccountInfo({
             ...accountInfo,
             [name]: value,
         })
     }
     const handleBlur = () => {
-        if (accountInfo.email === '') {
+        if (accountInfo.taiKhoan === '') {
             setEmailActive(false)
-        } if (accountInfo.password === '') {
+        } if (accountInfo.matKhau === '') {
             setPassActive(false)
         }
     }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        props.fetchLogin(accountInfo, props.history)
+    }
+
+    const handleError = (e) => {
+        const { name, value } = e.target;
+        let mess = emptyValid(value);
+        // console.log(mess);
+        setAccountInfo({
+            ...accountInfo
+            , err: { ...accountInfo.err, [name]: mess }
+        })
+    }
     return (
 
-        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-green-50 via-green-300 to-green-500">
-            <form className="flex flex-col justify-center items-center p-6 max-w-md bg-gradient-to-br from-white to-transparent bg-opacity-20 shadow-md rounded-md backdrop-blur-md grid grid-rows-3 gap-10">
-                <h2 className="text-center text-2xl">Login</h2>
+        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-600 via-green-500 to-green-500">
+            <form onSubmit={handleSubmit} className="flex items-center p-6 w-2/3 md:w-1/4 bg-white bg-opacity-10 shadow-md grid grid-rows-5 gap-4 rounded-lg border-white border border-opacity-20">
+                <h2 className="text-center text-2xl text-white font-extrabold">Login</h2>
                 <div className="relative">
-                    <label htmlFor="email" className={emailActive ? "absolute -top-4 left-0" : "absolute top-0"}>Email</label>
-                    <input className="border-b-2 border-gray-300 outline-none bg-transparent round-md h-10" type="text" id="email" name="email" value={accountInfo.email} onChange={handleOnChange} onFocus={() => setEmailActive(true)} onBlur={() => handleBlur()} />
+                    <label htmlFor="taiKhoan" className={emailActive ? "absolute text-sm text-white font-bold -top-5 left-0 transition-all duration-500" : "absolute text-white font-semibold top-0 transition-all duration-500"}>Account</label>
+                    <input className="text-white border-b-2 border-gray-300 outline-none bg-transparent round-md w-full h-10" type="text" id="taiKhoan" name="taiKhoan" onChange={handleOnChange} onFocus={() => setEmailActive(true)} onBlur={handleBlur} onKeyUp={handleError} />
+
+                    {accountInfo.err.taiKhoan ? <div className="block text-red-500 font-bold">{accountInfo.err.taiKhoan}</div> : <div className="opacity-0">""</div>}
                 </div>
                 <div className="relative">
-                    <label htmlFor="password" className={passActive ? "absolute -top-4 left-0" : "absolute top-0"}>Password</label>
-                    <input className="border-b-2 border-gray-300 outline-none bg-transparent round-md h-10" type="password" id="password" name="password" value={accountInfo.password} onChange={handleOnChange} onFocus={() => setPassActive(true)}
-                        onBlur={() => handleBlur()} />
+                    <label htmlFor="matKhau" className={passActive ? "absolute text-sm text-white font-bold -top-5 left-0 transition-all duration-500" : "absolute font-semibold text-white top-0 transition-all duration-500"}>Password</label>
+                    <input className="text-white border-b-2 border-gray-300 outline-none bg-transparent round-md w-full h-10" type="password" id="matKhau" name="matKhau" onChange={handleOnChange} onFocus={() => setPassActive(true)}
+                        onBlur={handleBlur} onKeyUp={handleError} />
+                    {/* <span className="absolute bottom-5 bg-white w-full h-8 rounded-sm block opacity-10"></span> */}
+                    {accountInfo.err.matKhau ? <div className="block text-red-500 font-bold">{accountInfo.err.matKhau}</div> : <div className="opacity-0">""</div>}
                 </div>
-                <button className="rounded-md bg-red-50 py-2 w-20 mx-auto" type="submit">Confirm</button>
+
+                <button className="rounded-md bg-white text-green-700 py-2 min-w-full mx-auto font-bold hover:bg-green-700 hover:text-white" type="submit">Login</button>
+                <button className="rounded-md bg-white text-blue-600 py-2 min-w-full mx-auto font-bold hover:bg-blue-600 hover:text-white" type="submit">Sign Up</button>
+            
             </form>
         </div>
     )
 }
-export default connect(null,null)(LoginPage)
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchLogin: (user, history) => {
+            dispatch(actionLoginAPI(user, history));
+        }
+    }
+}
+export default connect(null, mapDispatchToProps)(LoginPage)
+
+
