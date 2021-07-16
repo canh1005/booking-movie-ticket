@@ -28,14 +28,14 @@ function HomeNavbar(props) {
         } else {
             return (<div className=" font-bold border-l-2 ">
                 <NavLink className="px-2 text-base hover:underline " to="/login">Đăng nhập</NavLink>
-                <NavLink className="px-2  text-base hover:underline " to="signUp">Đăng ký</NavLink>
+                <NavLink className="px-2  text-base hover:underline " to="/register">Đăng ký</NavLink>
             </div>)
 
         }
     }
     return (
         <div>
-            <header className="flex flex-auto justify-between bg-green-500 px-5 pt-3 items-center text-white">
+            <header className="flex flex-auto justify-between bg-gradient-to-r from-gray to-gray-1 px-5 pt-3 items-center text-white">
                 {/* Logo */}
                 <div className="flex flex-1 space-x-3 items-center">
                     {/* icon */}
@@ -50,8 +50,8 @@ function HomeNavbar(props) {
 
                 {/* Menu on destop */}
                 <div className=" mr-3 space-x-3 text-base md:text-lg hidden md:block">
-                    <NavLink activeClassName="bg-white text-green-500 " className=" transition duration-400 active:bg-gray-200 active:no-underline  p-2 rounded-md hover:text-green-500 hover:bg-white" to="a">Home</NavLink>
-                    <NavLink activeClassName="bg-white text-green-500" className="transition duration-400 active:bg-gray-200  p-2 rounded-md hover:text-green-500 hover:bg-white" to="b">Contact</NavLink>
+                    <NavLink activeClassName="bg-white text-green-500 " className=" transition duration-400 active:bg-gray-200 active:no-underline  p-2 rounded-md hover:text-blue-2 hover:bg-white" to="a">Home</NavLink>
+                    <NavLink activeClassName="bg-white text-green-500" className="transition duration-400 active:bg-gray-200  p-2 rounded-md hover:text-blue-2 hover:bg-white" to="b">Contact</NavLink>
                 </div>
                 {/* Menu_icon */}
                 <NavLink className="font-bold text-lg md:hidden" to="id_User"> UserName</NavLink>
