@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { emptyValid } from '../../utils/validation/validation';
 import { actionLoginAPI } from './../../redux/modules/LoginReducer/actions';
 import sun from '../../assets/images/sun2.png'
+import { NavLink } from 'react-router-dom';
 
 function LoginPage(props) {
     const [emailActive, setEmailActive] = React.useState(false);
@@ -14,7 +15,6 @@ function LoginPage(props) {
     })
     const handleOnChange = e => {
         const { name, value } = e.target;
-        console.log(e.target);
         setAccountInfo({
             ...accountInfo,
             [name]: value,
@@ -41,6 +41,12 @@ function LoginPage(props) {
             , err: { ...accountInfo.err, [name]: mess }
         })
     }
+    const errorNoti = () => {
+        if (props.error) {
+            return <div className="bg-red-1 text-white font-bold p-3 rounded-md"> {props.error.response.data}</div>
+        }
+    }
+
     return (
 
         <div className="flex justify-center items-center relative min-h-screen bg-gradient-to-tl from-blue-2 via-light-blue to-white">
@@ -50,19 +56,19 @@ function LoginPage(props) {
                 <div className="relative">
                     <label htmlFor="taiKhoan" className={emailActive ? "absolute text-sm text-white font-bold -top-5 left-0 transition-all duration-500" : "absolute text-white font-semibold top-0 transition-all duration-500"}>Tài khoản</label>
                     <input className="text-white border-b-2 border-gray-300 outline-none bg-transparent round-md w-full h-10" type="text" id="taiKhoan" name="taiKhoan" onChange={handleOnChange} onFocus={() => setEmailActive(true)} onBlur={handleBlur} onKeyUp={handleError} />
-
-                    {accountInfo.err.taiKhoan ? <div className="block text-red-500 font-bold">{accountInfo.err.taiKhoan}</div> : <div className="opacity-0">""</div>}
+                    {accountInfo.err.taiKhoan ? <div className="block text-red font-bold">{accountInfo.err.taiKhoan}</div> : <div className="opacity-0">""</div>}
                 </div>
                 <div className="relative">
                     <label htmlFor="matKhau" className={passActive ? "absolute text-sm text-white font-bold -top-5 left-0 transition-all duration-500" : "absolute font-semibold text-white top-0 transition-all duration-500"}>Mật khẩu</label>
                     <input className="text-white border-b-2 border-gray-300 outline-none bg-transparent round-md w-full h-10" type="password" id="matKhau" name="matKhau" onChange={handleOnChange} onFocus={() => setPassActive(true)}
                         onBlur={handleBlur} onKeyUp={handleError} />
                     {/* <span className="absolute bottom-5 bg-white w-full h-8 rounded-sm block opacity-10"></span> */}
-                    {accountInfo.err.matKhau ? <div className="block text-red-500 font-bold">{accountInfo.err.matKhau}</div> : <div className="opacity-0">""</div>}
+                    {accountInfo.err.matKhau ? <div className="block text-red font-bold">{accountInfo.err.matKhau}</div> : <div className="opacity-0">""</div>}
                 </div>
-
+                {/* Thong bao loi */}
+                {errorNoti()}
                 <button className="rounded-md bg-white text-green-700 py-2 min-w-full mx-auto font-bold hover:bg-green-700 hover:text-white" type="submit">Đăng nhập</button>
-                <button className="rounded-md bg-white text-blue-600 py-2 min-w-full mx-auto font-bold hover:bg-blue-600 hover:text-white" type="submit">Đăng ký</button>
+                <NavLink className="text-center rounded-md bg-white text-blue-600 py-2 min-w-full mx-auto font-bold hover:bg-blue-600 hover:text-white" type="submit" to="/register">Đăng ký</NavLink>
 
             </form>
         </div>
@@ -76,6 +82,12 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-export default connect(null, mapDispatchToProps)(LoginPage)
+const mapStateToProps = (state) => {
+    return {
+        error: state.loginReducer.err
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
 
 
