@@ -4,12 +4,14 @@ import HomePage from './pages/HomePage/HomePage';
 import PageNotFound from './pages/PageNotFound/PageNotFound';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
+import ProfilePage from './pages/HomePage/Profile/ProfilePage';
 function App() {
   return (
       <Switch>
         <Route exact path="/" component={HomePage}/>
         <Route path="/login" component={LoginPage}/>
         <Route path="/register" component={RegisterPage}/>
+        <Route path="/profile" component={ProfilePage}/>
         <Route path="" component={PageNotFound}/>
       </Switch>
   );

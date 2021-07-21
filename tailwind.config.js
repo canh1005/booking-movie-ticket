@@ -14,7 +14,7 @@ module.exports = {
       'blue-2': '#2980B9',
       'light-blue': '#6DD5FA',
       'purple-1': '#2b1055',
-      'purlple-2': '#24243e',
+      'purple-2': '#24243e',
       'purple-3': '#302b63',
       'white': "#FFFFFF",
       'black': '#000000',
@@ -24,6 +24,20 @@ module.exports = {
       "red": '#EF4444',
       "red-1": '#e85656' ,
       'transparent': 'transparent',
+    },
+    animation: {
+      fallen: 'fallen 3s ease-in-out',
+      rise: 'rise 3s ease-in-out',
+    },
+    keyframes: {
+      fallen: {
+        '0%': { transform: 'translateY(-200px)' },
+        '100%': {transform: 'translateY(0px)'},
+      },
+      rise: {
+        '0%': { transform: 'translateY(-200px)' },
+        '100%': {transform: 'translateY(0px)'},
+      },
     },
   },
   variants: {
