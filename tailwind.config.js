@@ -47,6 +47,7 @@ module.exports = {
       animation: ['motion-safe'],
       opacity: ['disabled'],
       cursor: ['disabled'],
+      fontWeight: ['hover', 'focus'],
     },
   },
   plugins: [],
