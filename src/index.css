@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .glass{
+        @apply bg-white bg-opacity-10 shadow-xl rounded-md backdrop-filter backdrop-blur-md border-white border-t-2 border-l-2;
+    }
+    .btn{
+        @apply rounded-md py-2 px-4 text-center font-bold;
+    }
+    .btn-white-hover-purple{
+        @apply text-black bg-white hover:bg-purple-3 hover:text-white;
+    }
+    .btn-white-hover-blue{
+        @apply text-black bg-white hover:bg-blue-2 hover:text-white;
+    }
+    .btn-red{
+        @apply text-white bg-red-1 hover:bg-red;
+    }
+    .btn-purple{
+        @apply text-blue-1 bg-purple-1 hover:text-white; 
+    }
+}
