@@ -18,8 +18,8 @@ function ProfilePage(props) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    const { result } = props;
-    if (result) {
+    const { userProfile } = props;
+    if (userProfile) {
         return (
             <div className="bg-gradient-to-r from-black-1 via-purple-3 to-purple-2 h-screen">
                 {/* Back to Home */}
@@ -36,14 +36,14 @@ function ProfilePage(props) {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" />
                             </svg>
-                            <p>Họ Tên: {result.hoTen}</p>
+                            <p>Họ Tên: {userProfile.hoTen}</p>
                             <button className="btn btn-purple w-36 mx-auto disabled:opacity-50 disabled:bg-purple-1 disabled:text-blue-1 disabled:cursor-default" disabled={editOpen} onClick={() => { setEditOpen(true) }}>Sửa tài khoản</button>
                         </div>
                         {/* User details */}
                         <div className="bg-purple-1 p-2 bg-white shadow-2xl rounded-md">
-                            <p>Tài khoản: {result.taiKhoan} </p>
-                            <p>Số điện thoại: {result.soDT}</p>
-                            <p>Email: {result.email}</p>
+                            <p>Tài khoản: {userProfile.taiKhoan} </p>
+                            <p>Số điện thoại: {userProfile.soDT}</p>
+                            <p>Email: {userProfile.email}</p>
                         </div>
                         {/* List of booked tickets */}
                         <div className="bg-blue-1 p-2 bg-white shadow-2xl rounded-md">
@@ -53,7 +53,7 @@ function ProfilePage(props) {
                     </div>
                 </div>
                 {/* User edit popup */}
-                {editOpen ? <EditProfile setEditOpen={setEditOpen} /> : ""}
+                {editOpen ? <EditProfile profile={userProfile} setEditOpen={setEditOpen} /> : ""}
             </div>
         )
     }
@@ -72,7 +72,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 const mapStateToProps = (state) => {
     return {
-        result: state.ProfileReducer.data
+        userProfile: state.ProfileReducer.data
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage)
