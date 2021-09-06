@@ -12,7 +12,7 @@ function RegisterPage(props) {
         matKhau: "",
         email: "",
         soDt: "",
-        maNhom: "GP01",
+        maNhom: "GP05",
         maLoaiNguoiDung: "KhachHang",
         hoTen: "",
         err: {
@@ -77,7 +77,7 @@ function RegisterPage(props) {
             <img className="absolute object-cover w-full h-full" src={star} alt="" />
             <img className="absolute mix-blend-screen w-3/12 h-3/12 left-2/3 top-0" src={moon} alt="" />
             <div className="text-white w-2/3 md:w-1/3">
-                <form onSubmit={onSubmit} className="grid grid-cols-1 gap-2 bg-white bg-opacity-10 shadow-xl rounded-md backdrop-filter backdrop-blur-md border-white border-t-2 border-l-2 p-5 ">
+                <form onSubmit={onSubmit} className="grid grid-cols-1 gap-2 glass p-5 ">
                     <svg xmlns="http://www.w3.org/2000/svg" className="absolute hidden lg:block -top-6 left-1/2 h-12 w-10 " viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" />
                     </svg>
@@ -104,8 +104,8 @@ function RegisterPage(props) {
                     <label htmlFor="customerName">Họ tên</label>
                     <input className="text-white border-b-2 border-gray-300 outline-none bg-transparent round-md w-full h-7" type="text" id="customerName" name="hoTen" onChange={handleChange} onBlur={handleError} />
                     {RegisterInfo.err.hoTen ? <div className="text-red font-bold ">{RegisterInfo.err.hoTen}</div> : <div></div>}
-                    <button className="rounded-md bg-white text-blue-1 py-2 min-w-full mx-auto font-bold hover:bg-blue-2 hover:text-white disabled:opacity-50 disabled:bg-white disabled:text-blue-1 disabled:cursor-default" disabled={!RegisterInfo.formValid}>Đăng ký</button>
-                    <NavLink className="text-center rounded-md bg-white text-blue-1 py-2 min-w-full mx-auto font-bold hover:bg-blue-2 hover:text-white" to="/login">Đã có tài khoản ?</NavLink>
+                    <button className="btn btn-white-hover-blue text-blue-1 min-w-full mx-auto font-bold disabled:opacity-50 disabled:bg-white disabled:text-blue-1 disabled:cursor-default" disabled={!RegisterInfo.formValid}>Đăng ký</button>
+                    <NavLink className="btn btn-white-hover-blue text-blue-1 min-w-full mx-auto font-bold " to="/login">Đã có tài khoản ?</NavLink>
                 </form>
             </div>
         </div>

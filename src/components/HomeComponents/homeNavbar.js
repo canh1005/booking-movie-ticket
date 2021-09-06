@@ -5,17 +5,18 @@ import T_logo from "../../assets/images/T_logo.png"
 import { actLogout } from '../../redux/modules/LoginReducer/actions';
 
 function HomeNavbar(props) {
-    const [isOpen, setOpen] = useState("false")
+    const [isOpen, setOpen] = useState(false)
+    const [userMenu, setUserMenu] = useState(false)
     const loginRender = () => {
         if (localStorage.getItem("user")) {
             return (
                 <div className="flex items-end pl-4 md:block border-l-2" >
-                    <NavLink className=" pr-1" to="id_User">
+                    <NavLink className="pr-1" to="/profile">
                         <svg xmlns="http://www.w3.org/2000/svg" className="inline-block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         {/* user is key */}
-                        <div className="font-bold text-lg" > {localStorage.getItem('user') ? `${JSON.parse(localStorage.getItem('user')).hoTen}` : "UserName"}</div>
+                        <span className="font-bold text-lg" > {localStorage.getItem('user') ? `${JSON.parse(localStorage.getItem('user')).hoTen}` : "UserName"}</span>
                     </NavLink>
                     {/* LOGOUT BUTTON */}
                     <button onClick={() => { props.fetchLogout(props.history) }} className=" ml-5 ">

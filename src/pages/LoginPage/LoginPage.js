@@ -51,7 +51,7 @@ function LoginPage(props) {
 
         <div className="flex justify-center items-center relative min-h-screen bg-gradient-to-tl from-blue-2 via-light-blue to-white">
             <img className="absolute animate-fallen top-10 left-10 mix-blend-darken w-20 h-20" src={sun} alt="" />
-            <form onSubmit={handleSubmit} className="flex items-center p-6 w-2/3 md:w-1/4 bg-white bg-opacity-10 shadow-md grid grid-rows-5 gap-4 rounded-lg border-white border border-opacity-20">
+            <form onSubmit={handleSubmit} className="flex items-center p-6 w-2/3 md:w-1/4 grid grid-rows-5 gap-4 glass">
                 <h2 className="text-center text-2xl text-white font-extrabold">Đăng nhập</h2>
                 <div className="relative">
                     <label htmlFor="taiKhoan" className={emailActive ? "absolute text-sm text-white font-bold -top-5 left-0 transition-all duration-500" : "absolute text-white font-semibold top-0 transition-all duration-500"}>Tài khoản</label>
@@ -67,8 +67,8 @@ function LoginPage(props) {
                 </div>
                 {/* Error Notification */}
                 {errorNoti()}
-                <button className="rounded-md bg-white text-black py-2 min-w-full mx-auto font-bold hover:bg-purple-3 hover:text-white" type="submit">Đăng nhập</button>
-                <NavLink className="text-center rounded-md bg-white text-black py-2 min-w-full mx-auto font-bold hover:bg-purple-3 hover:text-white" type="submit" to="/register">Đăng ký</NavLink>
+                <button className="btn btn-white-hover-purple min-w-full mx-auto font-bold" type="submit">Đăng nhập</button>
+                <NavLink className="btn btn-white-hover-purple text-center min-w-full mx-auto font-bold" type="submit" to="/register">Đăng ký</NavLink>
 
             </form>
         </div>
